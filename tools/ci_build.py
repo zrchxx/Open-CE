@@ -31,7 +31,7 @@ OUTPUTS = {
     # (and the SDL3 the portable build brings, tools/linux_build.py, with its
     # zlib license, as the release carries the other libraries')
     "linux": ["build/linux/halo", "build/linux/libSDL3.so.0", "build/linux/SDL3-LICENSE.txt"],
-    "windows": ["build/windows/halo.exe", "build/windows/SDL3.dll"],
+    "windows": ["build/windows/halo.exe", "build/windows/SDL3.dll", "build/windows/libEGL.dll"],
     "android": [],  # the APK, below
 }
 APKS = {
@@ -51,7 +51,7 @@ def main() -> int:
     parser.add_argument("config", choices=["debug", "release", "profile"])
     args = parser.parse_args()
 
-    configure = [sys.executable, "configure.py", "--portable"]
+    configure = [sys.executable, "configure.py", "--portable", "--gles"]
     if args.config == "release":
         configure.append("--release")
     else:
